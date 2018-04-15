@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BankAccounts</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Bank" asp-action="Logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+<div class="row">
+    <div class="col-md-6">
+        <h1>Welcome, @ViewBag.UserName</h1>
+    </div>
+    <div class="col-md-6">
+        <h1>Current Balance: @ViewBag.Balance</h1>
+    </div>
+</div>
+<div class="row text-center amount">
+    <form action="process" method="Post">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <h4>Deposit/Withdraw</h4>
+            </div>
+            <div class="col-md-4">
+                <input type="number" name="amount" class="form-control" placeholder="Enter Amount">
+            </div>
+            <div class="col-md-4">
+                <input type="hidden" name="user" value="@ViewBag.UserId">
+                <input type="submit" class="btn btn-primary form-control">
+            </div>
+        </div>
+    </form>
+    <span class="error">@TempData["Error"]</span>
+    <table class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th class="text-center">Amount</th>
+                <th class="text-center">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach( var item in @ViewBag.History){
+            <tr>
+                <td>$ @item.Amount</td>
+                <td>@item.Created_at.ToString("MMM dd, yyyy") </td>
+            </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model BankAccounts.Models.RegisterViewModel;
+
+
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-6">
+            <form action="LoggingIn" method="POST" class="form-group">
+                <h1>Login</h1>
+                Email: <input type="email" name="loginemail" class="form-control"> 
+                Password: <input type="password" name="loginpw" class="form-control">
+                <br>
+                <input type="submit" name="login" value="Login" class="btn btn-info">
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3 class="registered"><a href="Index">Need to Register?</a></h3>
+            <div>
+            @{
+                <span>@ViewBag.Error </span>
+            }
+            </div>
+        </div>
+    </div>
